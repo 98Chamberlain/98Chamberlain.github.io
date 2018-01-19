@@ -118,7 +118,7 @@ GraphDataSource.prototype.initialGraphElement = function(callbackView) {
     });
     var f2 = $.ajax({
         type: "GET",
-        url: "./cg_description.csv",//"https://dl.dropbox.com/s/o9m8rjgo4uroara/inchai_fraction_in_line.csv",
+        url: "https://dl.dropbox.com/s/fvzy9lld01nb2wk/cg_description.csv",//"https://dl.dropbox.com/s/o9m8rjgo4uroara/inchai_fraction_in_line.csv",
         dataType: "text",
         success: function (data) {
             descriptionList = self.processData(data);
