@@ -105,6 +105,9 @@ GraphView.prototype.init = function(){
                     not_fit: { color: { background: 'pink', hover: 'INDIANRED', highlight: 'INDIANRED' }, borderWidth: 3 },
                     unknown: { color: { background: 'lightgray', hover: 'SILVER', highlight: 'SILVER' }, borderWidth: 0 },
                     conflict: { color: { background: 'orange' }, borderWidth: 3 },
+                    // for miaoping
+                    better: { color: { background: 'lightgreen', hover: 'LIMEGREEN', highlight: 'LIMEGREEN', border: 'orange' }, borderWidth: 3 },
+                    worse: { color: { background: 'pink', hover: 'INDIANRED', highlight: 'INDIANRED', border: 'orange' }, borderWidth: 3 },
                 },
                 physics: {
                     enabled: false,
@@ -197,6 +200,10 @@ GraphView.prototype.updateStudentDropdown = function(){
     studentDropdown[0].innerHTML = "";
     for(var i=0; i<studentList.length; i++){
         var email = studentList[i];
+        // miaoping
+        if(email.indexOf("六")===-1){
+            continue;
+        }
         var stuItem = $("<a></a>").text(email);
         stuItem.attr("class", "dropdown-item");
         stuItem.attr("id", email);

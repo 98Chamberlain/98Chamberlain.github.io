@@ -141,7 +141,7 @@ GraphDataSource.prototype.initialGraphElement = function(callbackView) {
     });
     var f4 = $.ajax({
         type: "GET",
-        url: "https://dl.dropbox.com/s/218287ehwulzj1a/pintong_remedial_result_for_teacher.txt", //"https://dl.dropbox.com/s/j9tcnyrr8b2t16b/pintong_remedial_result.txt",
+        url: "https://dl.dropbox.com/s/x7p1zj9k0hdtsob/miaoping_result.txt", //"https://dl.dropbox.com/s/218287ehwulzj1a/pintong_remedial_result_for_teacher.txt", //"https://dl.dropbox.com/s/j9tcnyrr8b2t16b/pintong_remedial_result.txt",
         dataType: "text",
         success: function (data) {
             self.loadRemedialJson(data);
@@ -149,7 +149,7 @@ GraphDataSource.prototype.initialGraphElement = function(callbackView) {
     });
     var f5 = $.ajax({
         type: "GET",
-        url: "https://dl.dropbox.com/s/uj4r7vfqtr6u0t0/pintong_junyi_result_for_teacher.txt", //"https://dl.dropbox.com/s/snfffgshh19hen3/pintong_junyi_result.txt",
+        url: "https://dl.dropbox.com/s/cdv3vorarliu832/miaoping_junyi_result.txt", //"https://dl.dropbox.com/s/uj4r7vfqtr6u0t0/pintong_junyi_result_for_teacher.txt", //"https://dl.dropbox.com/s/snfffgshh19hen3/pintong_junyi_result.txt",
         dataType: "text",
         success: function (data) {
             self.loadJunyiJson(data);
@@ -323,6 +323,9 @@ GraphDataSource.prototype.collectData = function(data, type){
                     "type": type,
                     "status": result['status'],
                 }
+                if('desc' in result){
+                    resultObj['desc'] = result['desc']
+                }
                 this.resultData[email].push(resultObj);
             } else {
                 for(var i=0; i<result.length; i++){
@@ -425,7 +428,27 @@ GraphDataSource.prototype.getDisplayNodeList = function(){
             var needUpdate = remedialData[name]["date"] ? (remedialData[name]["date"] < result["date"]) : true;
             if(needUpdate){
                 remedialData[name]["date"] = result["date"];
-                remedialData[name]["status"] = result["status"];
+                // remedialData[name]["status"] = result["status"];
+                // for miaoping
+                if(remedialData[name]["status"] > result["status"]){
+                    remedialData[name]["status"] = "better";
+                } else if (remedialData[name]["status"] < result["status"]) {
+                    remedialData[name]["status"] = "worse";
+                } else {
+                    remedialData[name]["status"] = result["status"]
+                }
+            }
+            // for miaoping
+            var needUpdate = remedialData[name]["date"] ? (remedialData[name]["date"] > result["date"]) : true;
+            if (needUpdate) {
+                remedialData[name]["date"] = result["date"];
+                if (remedialData[name]["status"] > result["status"]) {
+                    remedialData[name]["status"] = "worse";
+                } else if (remedialData[name]["status"] < result["status"]) {
+                    remedialData[name]["status"] = "better";
+                } else {
+                    remedialData[name]["status"] = result["status"]
+                }
             }
             var curDesc = '補救教學結果：' + descDict[result["status"]];
             if (result["date"]) {
@@ -453,7 +476,11 @@ GraphDataSource.prototype.getDisplayNodeList = function(){
                 }
             }
             junyiData[name]["status"][result["status"]] += 1;
-            var curDesc = descDict[result["status"]] + ' ' + this.getExName(result["name"]);
+            if('desc' in result){
+                var curDesc = result['desc'] + ' ' + this.getExName(result["name"]);
+            } else {
+                var curDesc = descDict[result["status"]] + ' ' + this.getExName(result["name"]);
+            }
             if (result["date"]) {
                 curDesc = result["date"] + ' ' + curDesc;
             }

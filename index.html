@@ -237,12 +237,15 @@
                     guessT: { color: { background: 'yellow', hover: 'GOLD', highlight: 'GOLD'}, borderWidth: 0 },
                     guessX: { color: { background: 'lightcoral', hover: 'INDIANRED', highlight: 'INDIANRED'}, borderWidth: 0 },
                     JY: {color:{background:'white'}, borderWidth: 3},
-                    under5: {color:{background:'yellow', hover: 'GOLD', highlight: 'GOLD'}, borderWidth: 3},
-                    fit: {color:{background:'lightgreen', hover: 'LIMEGREEN', highlight: 'LIMEGREEN'}, borderWidth: 3},
-                    easy: {color:{background:'lightgreen', hover: 'LIMEGREEN', highlight: 'LIMEGREEN'}, borderWidth: 3},
-                    not_fit: {color:{background:'pink', hover: 'INDIANRED', highlight: 'INDIANRED'}, borderWidth: 3},
+                    under5: {color:{background:'yellow', hover: 'GOLD', highlight: 'GOLD', border: 'green'}, borderWidth: 3},
+                    fit: {color:{background:'lightgreen', hover: 'LIMEGREEN', highlight: 'LIMEGREEN', border: 'green'}, borderWidth: 3},
+                    easy: {color:{background:'lightgreen', hover: 'LIMEGREEN', highlight: 'LIMEGREEN', border: 'green'}, borderWidth: 3},
+                    not_fit: {color:{background:'pink', hover: 'INDIANRED', highlight: 'INDIANRED', border: 'green'}, borderWidth: 3},
                     unknown: {color:{background:'lightgray', hover: 'SILVER', highlight: 'SILVER'}, borderWidth: 0},
                     conflict: { color: { background: 'orange' }, borderWidth: 3 },
+                    // for miaoping
+                    better: { color: { background: 'lightgreen', hover: 'LIMEGREEN', highlight: 'LIMEGREEN', border: 'orange' }, borderWidth: 3 },
+                    worse: { color: { background: 'pink', hover: 'INDIANRED', highlight: 'INDIANRED', border: 'orange' }, borderWidth: 3 },
                 },
                 physics:{
                     enabled: false,
@@ -376,7 +379,7 @@
             <div id="studentDropdownContainer" class="dropdown-menu" aria-labelledby="dropdownStudentButton">
             </div>
         </span>
-        <span class="dropdown" style="display:none;">
+        <span class="dropdown">
             <button class="btn btn-success dropdown-toggle" type="button" id="dropdownDateButton" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false" disabled>
                 選擇時間
@@ -389,7 +392,7 @@
         <span id="guessNode" style="margin-left: 10px; display: none;"></span>
     </div>
     
-    <div id="recommend-panel-container">
+    <div id="recommend-panel-container" style="display:none;">
         <div id="guess-learned-text"></div>
         <div id="recommend-container"></div>
     </div>
